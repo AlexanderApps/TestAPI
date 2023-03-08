@@ -13,8 +13,6 @@ router = APIRouter(
 )
 
 
-
-
 @router.post("/", response_model=IUserOut)
 async def create_user(user: IUser,
                       current_user: ITokenData = Depends(get_current_user)):
@@ -57,7 +55,7 @@ async def get_users(
                       description=user_query_description["name"]),
     limit: int = Query(100, title="limit",
                        description=user_query_description["limit"]),
-    sort_by: Optional[List[SortUserBy]] = Query(
+    sort_by: List[SortUserBy] | None = Query(
         None, title="order by", description=user_query_description["sort_by"]),
     skip: int = Query(
         0, title="skip", description=user_query_description["sort_by"]),

@@ -1,6 +1,6 @@
 from datetime import datetime
-from typing import List, Optional
-from pydantic import BaseModel as PyBaseModel
+from typing import List
+from pydantic import BaseModel as PyBaseModel, validator
 from schemas.iquery_params import SortOrder, SortTransactionBy
 
 from schemas.itransaction_product import IProductTransaction
@@ -8,13 +8,18 @@ from schemas.itransaction_product import IProductTransaction
 
 class ITransaction(PyBaseModel):
     transaction_name: str
-    type: Optional[int] = 1
-    access: Optional[int] = 1
+    access: int | None = 1
+    type: int
     status: int
     createdby: int
     last_updatedby: int
     items: List[IProductTransaction]
     amount: float
+
+    @validator("transaction_name")
+    @classmethod
+    def validate_transaction_name(cls, value):
+        return value.strip()
 
 
 class ITransactionItems(PyBaseModel):
@@ -35,8 +40,8 @@ class ITransactionBody(PyBaseModel):
 
 
 class ITransactionQueryParams(PyBaseModel):
-    name: Optional[str] = None
-    limit: Optional[int] = 100
-    sort_by: Optional[List[SortTransactionBy]] = None
-    skip: Optional[int] = 0
-    order: Optional[SortOrder] = SortOrder.asc
+    name: str | None = None
+    limit: int | None = 100
+    sort_by: List[SortTransactionBy] | None = None
+    skip: int | None = 0
+    order: SortOrder | None = SortOrder.asc

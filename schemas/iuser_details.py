@@ -1,16 +1,15 @@
-from typing import Optional
 from pydantic import BaseModel as PyBaseModel, EmailStr
 
 
 class IUserDetail(PyBaseModel):
-    user_phone: Optional[str] = None
-    user_address: Optional[str] = None
-    user_parent_name: Optional[str] = None
-    bank_account_name: Optional[str] = None
-    bank_account_number: Optional[str] = None
-    bank_name: Optional[str] = None
-    bank_branch: Optional[str] = None
-    next_of_kin_name: Optional[str] = None
-    next_of_kin_email: Optional[EmailStr] = None
-    next_of_kin_number: Optional[str] = None
-    next_of_kin_address: Optional[str] = None
+    user_phone: str | None = None
+    user_address: str | None = None
+    user_parent_name: str | None = None
+    bank_account_name: str | None = None
+    bank_account_number: str | None = None
+    bank_name: str | None = None
+    bank_branch: str | None = None
+    next_of_kin_name: str | None = None
+    next_of_kin_email: EmailStr | None = None
+    next_of_kin_number: str | None = None
+    next_of_kin_address: str | None = None

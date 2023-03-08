@@ -41,10 +41,6 @@ class UserActions:
             if user_validated.personal_detail else None
         )
         user_detail = {x: y for x,y in user_detail.items()} if user_detail else None
-        print(user_detail)
-        print(user_detail)
-        print(user_detail)
-        print(user_detail)
         user_ = {x: y for x, y in user_validated.dict().items() if y != None}
         del user_["personal_detail"]
         User.update(**user_).where(User.user_id == user_id).execute()
