@@ -1,0 +1,6 @@
+type_name,description,mod
+SALES,,-1
+RETURNED,,1
+RECEIVED,,1
+REJECT,,-1
+ORDER,,0

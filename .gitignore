@@ -1,0 +1,7 @@
+peewee
+config.yaml
+people.db
+venv
+people.sqlite
+test.sql
+.vscode

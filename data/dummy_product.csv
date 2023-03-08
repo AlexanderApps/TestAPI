@@ -1,0 +1,21 @@
+name,other_names,batch_number,expiry_date,status,access,price,quantity_available
+Aspirin,Acetylsalicylic Acid,A1234,2024-07-01,1,1,9.99,100
+Ibuprofen,Nurofen,I2345,2023-12-31,1,1,12.99,50
+Paracetamol,Tylenol,P3456,2024-09-15,1,1,7.99,150
+Metformin,Glucophage,M4567,2025-03-22,1,1,18.99,200
+Lisinopril,Zestril,L5678,2023-11-30,1,1,24.99,75
+Atorvastatin,Lipitor,A6789,2023-12-31,1,1,39.99,30
+Omeprazole,Prilosec,O7890,2024-10-15,1,1,21.99,100
+Losartan,Cozaar,L8901,2025-02-28,1,1,29.99,60
+Simvastatin,Zocor,S9012,2024-04-30,1,1,28.99,50
+Levothyroxine,Synthroid,L0123,2023-09-30,1,1,17.99,80
+Furosemide,Lasix,F1234,2025-01-31,1,1,11.99,120
+Hydrochlorothiazide,Microzide,H2345,2024-08-31,1,1,16.99,90
+Fluoxetine,Prozac,F3456,2023-12-31,1,1,27.99,40
+Escitalopram,Lexapro,E4567,2024-11-30,1,1,32.99,25
+Metoprolol,Lopressor,M5678,2024-05-31,1,1,22.99,70
+Amlodipine,Norvasc,A6789,2024-06-30,1,1,19.99,100
+Citalopram,Celexa,C7890,2025-01-15,1,1,26.99,60
+Clopidogrel,Plavix,C8901,2023-10-31,1,1,37.99,30
+Atenolol,Tenormin,A9012,2024-03-31,1,1,14.99,120
+Montelukast,Singulair,M0123,2025-04-30,1,1,29.99,50

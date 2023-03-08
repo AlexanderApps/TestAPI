@@ -1,0 +1,16 @@
+first_name,last_name,middle_name,user_name,password,birthday,status,access,job_description,date_created,last_updated
+John,Smith,William,js01,pass123,1990-05-12,True,2,Developer,2022-02-18 15:30:00,2022-02-18 15:30:00
+Jane,Doe,,jd02,secret321,1985-12-22,False,1,Manager,2022-02-18 16:00:00,2022-02-18 16:00:00
+David,Johnson,Michael,dj03,p@ssword,1995-08-06,True,3,Designer,2022-02-18 17:30:00,2022-02-18 17:30:00
+Sarah,Williams,,sw04,hello123,1993-02-10,True,2,Engineer,2022-02-18 14:00:00,2022-02-18 14:00:00
+Michael,Brown,Thomas,mb05,password123,1988-11-18,False,1,Manager,2022-02-18 18:30:00,2022-02-18 18:30:00
+Emily,Davis,,ed06,letmein,1991-04-02,True,2,Developer,2022-02-18 10:30:00,2022-02-18 10:30:00
+William,Miller,Robert,wm07,qwerty,1994-07-16,True,3,Designer,2022-02-18 09:30:00,2022-02-18 09:30:00
+Olivia,Smith,,os08,abc123,1989-09-28,False,1,Manager,2022-02-18 19:30:00,2022-02-18 19:30:00
+Ethan,Johnson,Alexander,ej09,passw0rd,1996-06-12,True,2,Developer,2022-02-18 12:30:00,2022-02-18 12:30:00
+Sophia,Wilson,,sw10,welcome,1992-01-24,True,3,Designer,2022-02-18 08:30:00,2022-02-18 08:30:00
+Benjamin,Lee,Edward,bl11,admin123,1987-04-08,False,1,Manager,2022-02-18 11:30:00,2022-02-18 11:30:00
+Isabella,Baker,,ib12,letmein1,1998-03-01,True,2,Developer,2022-02-18 13:30:00,2022-02-18 13:30:00
+James,Mitchell,William,jm13,1234abcd,1997-10-05,True,3,Designer,2022-02-18 07:30:00,2022-02-18 07:30:00
+Mia,Taylor,,mt14,pass@word,1999-12-15,False,1,Manager,2022-02-18 20:30:00,2022-02-18 20:30:00
+Alexander,Anderson,Michael,aa15,admin321,1986-02-28,True,2,Developer,2022-02-18 22:30:00,2022-02-18 20:30:00
