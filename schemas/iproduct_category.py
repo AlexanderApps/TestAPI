@@ -18,10 +18,10 @@ class IProductCategory(PyBaseModel):
         return value
 
 
-class IProductCategoryUpdate(IProductCategory):
-    category_id: int
-    category_name: str | None
 
+class IProductCategoryUpdate(IProductCategory):
+    category_name: str | None
+    description: str | None
 
 class IProductCategoryRef(PyBaseModel):
     category_id: int
