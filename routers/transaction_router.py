@@ -14,7 +14,6 @@ router = APIRouter(
 )
 
 
-
 class OrderBy(Enum):
     date_created = Transaction.date_created
     transaction_id = Transaction.transaction_id
@@ -24,10 +23,11 @@ class OrderBy(Enum):
 async def get_transactions(
     name: str = Query(None, title="name_filter", description=""),
     limit: int = Query(100, title="limit", description=""),
-    sort_by: Optional[List[SortTransactionBy]] = Query(None, title="order by", description=""),
+    sort_by: List[SortTransactionBy] | None = Query(
+        None, title="order by", description=""),
     skip: int = Query(0, title="skip", description=""),
     order: SortOrder = Query("asc", title="order",
-                       description="Either `asc` for ascending or `desc` for descending"),
+                             description="Either `asc` for ascending or `desc` for descending"),
     current_user=Depends(get_current_user)
 ):
     params = ITransactionQueryParams(

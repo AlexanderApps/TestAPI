@@ -11,8 +11,7 @@ class ProductCategoryActions:
 
     @staticmethod
     def create_category(category: IProductCategory, current_user: int):
-        category_validated = ProductValidator.category_validate(category)
-        category_ = category_validated.dict().copy()
+        category_ = category.dict().copy()
         category_["createdby"] = current_user
         try:
             q: int = ProductCategory.insert(**category_).execute()
@@ -67,6 +66,7 @@ class ProductCategoryActions:
         return category
 
     @staticmethod
+
     def update_category(category_id: int, category: IProductCategoryUpdate, current_user: int):
         category_validated = ProductValidator.category_validate(category)
         category_ = {x: y for x, y in category_validated.dict().items()

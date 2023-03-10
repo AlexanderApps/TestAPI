@@ -1,18 +1,27 @@
-from typing import List, Optional
-from pydantic import BaseModel as PyBaseModel
+from typing import List
+from pydantic import BaseModel as PyBaseModel,  validator
 
 from schemas.iquery_params import SortOrder, SortProductCategoryBy
 
 
 class IProductCategory(PyBaseModel):
     category_name: str
-    description: Optional[str] = None
+    description: str | None
+
+    @validator("category_name")
+    @classmethod
+    def validate_category_name(cls, value):
+        if value:
+            value = value.strip().upper()
+            value = " ".join(v for v in value.split(" ") if v != "")
+            return value
+        return value
 
 
-class IProductCategoryUpdate(PyBaseModel):
-    category_name: Optional[str] = None
-    description: Optional[str] = None
 
+class IProductCategoryUpdate(IProductCategory):
+    category_name: str | None
+    description: str | None
 
 class IProductCategoryRef(PyBaseModel):
     category_id: int
@@ -24,12 +33,11 @@ class IProductCategoryRefAdd(PyBaseModel):
 
 
 class IProductCategoryQueryParams(PyBaseModel):
-    name: Optional[str] = None
-    limit: Optional[int] = 100
-    sort_by: Optional[List[SortProductCategoryBy]] = None
-    skip: Optional[int] = 0
-    order: Optional[SortOrder] = SortOrder.asc
-
+    name: str | None
+    limit: int | None = 100
+    sort_by: List[SortProductCategoryBy] | None
+    skip: int | None = 0
+    order: SortOrder | None = SortOrder.asc
 
 
 # class IProductCategoryRefUpdate(PyBaseModel):
