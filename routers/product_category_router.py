@@ -32,13 +32,14 @@ async def create_product_category(category: IProductCategory,
         )
 
 
-@router.put("/")
-async def update_product_category(category: IProductCategoryUpdate,
+@router.put("/{category_id}")
+async def update_product_category(category_id: int, category: IProductCategoryUpdate,
                                   current_user: ITokenData = Depends(get_current_user)):
     try:
         return (
             ProductCategoryActions
             .update_category(
+                category_id,
                 category, current_user.user_id
             )
         )

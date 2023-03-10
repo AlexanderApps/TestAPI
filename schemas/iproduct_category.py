@@ -10,7 +10,6 @@ class IProductCategory(PyBaseModel):
 
 
 class IProductCategoryUpdate(PyBaseModel):
-    category_id: int
     category_name: Optional[str] = None
     description: Optional[str] = None
 

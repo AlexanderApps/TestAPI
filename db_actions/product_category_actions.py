@@ -67,12 +67,10 @@ class ProductCategoryActions:
         return category
 
     @staticmethod
-    def update_category(category: IProductCategoryUpdate, current_user: int):
+    def update_category(category_id: int, category: IProductCategoryUpdate, current_user: int):
         category_validated = ProductValidator.category_validate(category)
         category_ = {x: y for x, y in category_validated.dict().items()
                      if y != None}.copy()
-        category_id: int = category_["category_id"]
-        del category_["category_id"]
         ProductCategory.update(
             **category_).where(ProductCategory.category_id == category_id).execute()
         return ProductCategoryActions.get_category_by_id(category_id)
