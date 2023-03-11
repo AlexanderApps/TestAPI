@@ -1,6 +1,6 @@
 import csv
-import aiofiles
-import asyncio
+# import aiofiles
+# import asyncio
 import datetime
 import time
 

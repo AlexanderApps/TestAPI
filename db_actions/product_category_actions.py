@@ -1,7 +1,6 @@
 from models.state import Status
 from models.product import Product
 from helper.sort_order_mapper import mapper
-from helper.product_pretty import ProductValidator
 from models.product_category import ProductCategory
 from models.product_category_ref import ProductCategoryRef
 from schemas.iproduct_category import IProductCategory, IProductCategoryQueryParams, IProductCategoryRef, IProductCategoryUpdate
@@ -11,8 +10,7 @@ class ProductCategoryActions:
 
     @staticmethod
     def create_category(category: IProductCategory, current_user: int):
-        category_validated = ProductValidator.category_validate(category)
-        category_ = category_validated.dict().copy()
+        category_ = category.dict().copy()
         category_["createdby"] = current_user
         try:
             q: int = ProductCategory.insert(**category_).execute()
@@ -67,12 +65,10 @@ class ProductCategoryActions:
         return category
 
     @staticmethod
-    def update_category(category: IProductCategoryUpdate, current_user: int):
-        category_validated = ProductValidator.category_validate(category)
-        category_ = {x: y for x, y in category_validated.dict().items()
+
+    def update_category(category_id: int, category: IProductCategoryUpdate, current_user: int):
+        category_ = {x: y for x, y in category.dict().items()
                      if y != None}.copy()
-        category_id: int = category_["category_id"]
-        del category_["category_id"]
         ProductCategory.update(
             **category_).where(ProductCategory.category_id == category_id).execute()
         return ProductCategoryActions.get_category_by_id(category_id)

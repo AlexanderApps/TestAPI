@@ -32,13 +32,14 @@ async def create_product_category(category: IProductCategory,
         )
 
 
-@router.put("/")
-async def update_product_category(category: IProductCategoryUpdate,
+@router.put("/{category_id}")
+async def update_product_category(category_id: int, category: IProductCategoryUpdate,
                                   current_user: ITokenData = Depends(get_current_user)):
     try:
         return (
             ProductCategoryActions
             .update_category(
+                category_id,
                 category, current_user.user_id
             )
         )
@@ -87,9 +88,9 @@ async def get_category_by_id(
 async def get_categories(
     name: str = Query(None, title="username_filter", description=""),
     limit: int = Query(100, title="limit", description=""),
-    sort_by: Optional[List[SortProductCategoryBy]] = Query(None, title="order by", description=""),
+    sort_by: List[SortProductCategoryBy] | None = Query(None, title="order by", description=""),
     skip: int = Query(0, title="skip", description=""),
-    order: Optional[SortOrder] = Query("asc", title="order",
+    order: SortOrder | None = Query("asc", title="order",
                        description="Either `asc` for ascending or `desc` for descending"),
     current_user: ITokenData = Depends(get_current_user)
 ):

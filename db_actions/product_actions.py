@@ -2,15 +2,13 @@ from datetime import date
 from helper.sort_order_mapper import mapper
 from models.product import Product
 from schemas.iproduct import IProduct, IProductQueryParams
-from helper.product_pretty import ProductValidator
 
 
 class ProductActions:
 
     @staticmethod
     def create_product(product: IProduct, current_user: int):
-        product_validated = ProductValidator.product_validate(product)
-        product_ = product_validated.dict().copy()
+        product_ = product.dict().copy()
         product_["last_updatedby"] = product_["createdby"] = current_user
         try:
             q: int = Product.insert(**product_).execute()
@@ -60,8 +58,6 @@ class ProductActions:
 
     @staticmethod
     def update_product(id_: int, current_user: int):
-        # product_validated = ProductValidator.product_validate(product)
-        # product_ = product_validated.dict().copy()
         product = ProductActions.get_product_by_id(id_)
         Product.delete().where(Product.product_id == id_)
         return product

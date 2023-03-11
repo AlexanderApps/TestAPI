@@ -58,12 +58,13 @@ async def get_product_by_id(product_id: int,
 async def get_products(
     name: str = Query(None, title="name_filter", description=""),
     limit: int = Query(100, title="limit", description=""),
-    sort_by: Optional[List[SortProductBy]] = Query(
+    sort_by: List[SortProductBy] | None = Query(
         None, title="order by", description=""),
     skip: int = Query(0, title="skip", description=""),
-    order: Optional[SortOrder] = Query("asc", title="order",
-                                       description="Either `asc` for ascending or `desc` for descending"),
-    expired: Optional[bool] = Query(None, title="expired", description="Either `true` for ascending or `false` for descending"),
+    order: SortOrder | None = Query("asc", title="order",
+                                    description="Either `asc` for ascending or `desc` for descending"),
+    expired: bool | None = Query(
+        None, title="expired", description="Either `true` for ascending or `false` for descending"),
     current_user: ITokenData = Depends(get_current_user)
 ):
     params = IProductQueryParams(
