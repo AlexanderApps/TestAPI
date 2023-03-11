@@ -7,8 +7,8 @@ from routers import login_router, product_router, \
 
 ###############################################
 
-create_tables()
-init_tables()
+# create_tables()
+# init_tables()
 
 
 

@@ -1,7 +1,6 @@
 from models.state import Status
 from models.product import Product
 from helper.sort_order_mapper import mapper
-from helper.product_pretty import ProductValidator
 from models.product_category import ProductCategory
 from models.product_category_ref import ProductCategoryRef
 from schemas.iproduct_category import IProductCategory, IProductCategoryQueryParams, IProductCategoryRef, IProductCategoryUpdate
@@ -68,8 +67,7 @@ class ProductCategoryActions:
     @staticmethod
 
     def update_category(category_id: int, category: IProductCategoryUpdate, current_user: int):
-        category_validated = ProductValidator.category_validate(category)
-        category_ = {x: y for x, y in category_validated.dict().items()
+        category_ = {x: y for x, y in category.dict().items()
                      if y != None}.copy()
         ProductCategory.update(
             **category_).where(ProductCategory.category_id == category_id).execute()

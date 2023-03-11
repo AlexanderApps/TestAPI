@@ -25,8 +25,21 @@ class IProduct(PyBaseModel):
     def validate_other_names(cls, value):
         return value.strip().upper()
 
+    @validator("status")
+    @classmethod
+    def validate_status(cls, value):
+        if value <= 0:
+            raise ValueError("status cannot be less than or equal to 0.")
+        return value
 
-class IProductUpdate(PyBaseModel):
+    @validator("access")
+    @classmethod
+    def validate_access(cls, value):
+        if value <= 0:
+            raise ValueError("access cannot be less than or equal to 0.")
+        return value
+
+class IProductUpdate(IProduct):
     product_id: int
     name: str | None = None
     batch_number: str | None = None

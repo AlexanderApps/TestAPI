@@ -3,7 +3,6 @@ from auth.oauth import password_hasher
 from models.base_model import database
 from models.user_detail import UserDetail
 from helper.sort_order_mapper import mapper
-from helper.user_pretty import UserValidator
 from schemas.iuser import IUser, IUserQueryParams, IUserUpdate
 
 
@@ -13,11 +12,10 @@ class UserActions:
     @database.atomic()
     def create_user(user: IUser, creator: int):
         try:
-            user_validated = UserValidator.user_validate(user)
-            user_ = user_validated.dict()
+            user_ = user.dict()
             user_detail = (
-                user_validated.personal_detail.dict().copy()
-                if user_validated.personal_detail else None
+                user.personal_detail.dict().copy()
+                if user.personal_detail else None
             )
             del user_["personal_detail"]
             user_["createdby"] = user_["last_updatedby"] = creator
@@ -35,13 +33,12 @@ class UserActions:
         # hsl(351, 55%, 65%) Note(bugs): set last updated //
         # middle can't be set to null // user personal details
         # (should be create or update)
-        user_validated = UserValidator.user_validate(user)
         user_detail = (
-            user_validated.personal_detail.dict().copy()
-            if user_validated.personal_detail else None
+            user.personal_detail.dict().copy()
+            if user.personal_detail else None
         )
         user_detail = {x: y for x,y in user_detail.items()} if user_detail else None
-        user_ = {x: y for x, y in user_validated.dict().items() if y != None}
+        user_ = {x: y for x, y in user.dict().items() if y != None}
         del user_["personal_detail"]
         User.update(**user_).where(User.user_id == user_id).execute()
         exist_pd = UserDetail.get_or_none(UserDetail.user_id == user_id)

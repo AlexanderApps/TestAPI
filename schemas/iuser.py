@@ -2,6 +2,7 @@ from typing import List
 from datetime import datetime, date
 from pydantic import BaseModel as PyBaseModel, EmailStr, validator
 from schemas.iquery_params import SortOrder, SortUserBy
+from string import punctuation
 
 from schemas.iuser_details import IUserDetail
 
@@ -33,6 +34,15 @@ class IUser(PyBaseModel):
     @classmethod
     def validate_middle_name(cls, value):
         return value and value.strip().upper()
+
+    @validator("password")
+    @classmethod
+    def validate_password(cls, value):
+        if value and len(value) < 8:
+            raise ValueError("password should be at least eight characters")
+        if value and not value.contains(punctuation):
+            raise ValueError("password must contain special characters")
+        return value
 
 
 class IUserOut(PyBaseModel):

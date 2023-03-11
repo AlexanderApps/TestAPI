@@ -1,5 +1,5 @@
 from typing import List
-from pydantic import BaseModel as PyBaseModel,  validator
+from pydantic import BaseModel as PyBaseModel, validator
 
 from schemas.iquery_params import SortOrder, SortProductCategoryBy
 
@@ -18,10 +18,9 @@ class IProductCategory(PyBaseModel):
         return value
 
 
-
 class IProductCategoryUpdate(IProductCategory):
     category_name: str | None
-    description: str | None
+
 
 class IProductCategoryRef(PyBaseModel):
     category_id: int

@@ -2,7 +2,6 @@ from datetime import date
 from helper.sort_order_mapper import mapper
 from models.product import Product
 from schemas.iproduct import IProduct, IProductQueryParams
-from helper.product_pretty import ProductValidator
 
 
 class ProductActions:
