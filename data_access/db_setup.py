@@ -26,6 +26,8 @@ def temp_rand():
                 "0123456789"
             ) for i in range(9))
     )
+    if True: # ideally DEV ENV
+        result = "password"
     return result
 
 
