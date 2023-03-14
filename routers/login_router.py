@@ -24,6 +24,8 @@ async def login(seeker: OAuth2PasswordRequestForm = Depends()):
         valid = verify_hash(user.password, seeker.password)
         if not valid:
             raise ValueError("Invalid Credentials")
+        if user.status.status == 0:
+            raise ValueError("Inalid Credentials")
         token = create_access_token(ITokenMaker(
             user_id=user.user_id,
             access=user.access.row_id

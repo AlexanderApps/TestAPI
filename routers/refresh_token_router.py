@@ -5,9 +5,9 @@ from db_actions.login_refresh_token_actions import LoginRefreshTokenActions
 
 
 router = APIRouter(
-    tags=["Logout"]
+    tags=["RefreshToken"]
 )
 
-@router.post("/logout")
+@router.post("/refresh-token")
 async def logout(current_user: ITokenData = Depends(get_current_user)):
     LoginRefreshTokenActions.blacklist_token(current_user)

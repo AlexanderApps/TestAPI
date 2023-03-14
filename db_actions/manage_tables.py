@@ -8,6 +8,7 @@ from data_access.db_setup import init_access, init_admin, init_status, init_tran
 from models.product_category import create_product_category_table, drop_product_category_table
 from models.transaction_type import create_transaction_type_table, drop_transaction_type_table
 from models.transaction_product import create_transaction_product_table, drop_transaction_product_table
+from models.login_refresh_token import create_login_refresh_token_table, drop_login_refresh_token_table
 from models.product_category_ref import create_product_category_ref_table, drop_product_category_ref_table
 
 
@@ -17,6 +18,7 @@ create_tables_ = [
     create_user_table,
     create_product_table,
     create_user_detail_table,
+    create_login_refresh_token_table,
     create_transaction_type_table,
     create_transaction_table,
     create_product_category_table,
@@ -32,6 +34,7 @@ drop_tables_ = [
     drop_product_table,
     drop_transaction_type_table,
     drop_product_category_table,
+    drop_login_refresh_token_table,
     drop_user_table,
     drop_status_table,
     drop_access_table,

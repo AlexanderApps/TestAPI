@@ -1,12 +1,12 @@
 from auth.oauth2 import ITokenData
-from models.login_blacklist import LoginBlacklist
+from models.login_refresh_token import LoginRefreshToken
 
 
-class LoginBlacklistActions:
+class LoginRefreshTokenActions:
     @staticmethod
     def blacklist_token(token_data: ITokenData):
-        dt = LoginBlacklist.create(
+        dt = LoginRefreshToken.create(
             token=token_data.token,
             expiry=token_data.exp
         )
-        return LoginBlacklist.get(dt)
+        return LoginRefreshToken.get(dt)

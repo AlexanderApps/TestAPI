@@ -1,4 +1,4 @@
-from jose import JWTError, jwt
+from jose import ExpiredSignatureError, JWTError, jwt
 from datetime import timedelta, datetime
 from pydantic import BaseModel as PyBaseModel
 from fastapi.security import OAuth2PasswordBearer
@@ -53,7 +53,10 @@ def verify_access_token(token: str, credential_exception):
         if not decoded_info.user_id:
             raise credential_exception
         return ITokenData(token=token, **decoded_info.dict())
-    except JWTError:
+    except ExpiredSignatureError as ese:
+        raise credential_exception
+    except JWTError as j:
+        print(j)
         raise credential_exception
     except Exception as e:
         print(e)
