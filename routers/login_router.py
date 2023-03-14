@@ -4,7 +4,7 @@ from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 
 from models.user import User
 from auth.oauth import verify_hash
-from auth.oauth2 import ITokenData, create_access_token
+from auth.oauth2 import ITokenData, ITokenMaker, create_access_token
 
 
 class ILoginDetails(PyBaseModel):
@@ -24,7 +24,7 @@ async def login(seeker: OAuth2PasswordRequestForm = Depends()):
         valid = verify_hash(user.password, seeker.password)
         if not valid:
             raise ValueError("Invalid Credentials")
-        token = create_access_token(ITokenData(
+        token = create_access_token(ITokenMaker(
             user_id=user.user_id,
             access=user.access.row_id
         ))
