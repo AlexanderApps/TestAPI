@@ -7,22 +7,19 @@ from schemas.iuser import IUser, IUserQueryParams, IUserUpdate
 
 
 class UserActions:
-
     @staticmethod
     @database.atomic()
     def create_user(user: IUser, creator: int):
         try:
             user_ = user.dict()
             user_detail = (
-                user.personal_detail.dict().copy()
-                if user.personal_detail else None
+                user.personal_detail.dict().copy() if user.personal_detail else None
             )
             del user_["personal_detail"]
             user_["createdby"] = user_["last_updatedby"] = creator
             user_["password"] = password_hasher(user.password)
             q: int = User.create(**user_)
-            UserDetail.create(
-                user_id=q, **user_detail) if user_detail else None
+            UserDetail.create(user_id=q, **user_detail) if user_detail else None
             return UserActions.get_user_by_id(q)
         except Exception as e:
             print(e)
@@ -34,12 +31,12 @@ class UserActions:
         # middle can't be set to null // user personal details
         # (should be create or update)
         user_detail = (
-            user.personal_detail.dict().copy()
-            if user.personal_detail else None
+            user.personal_detail.dict().copy() if user.personal_detail else None
         )
-        user_detail = {x: y for x,y in user_detail.items()} if user_detail else None
+        user_detail = {x: y for x, y in user_detail.items()} if user_detail else None
         user_ = {x: y for x, y in user.dict().items() if y != None}
-        del user_["personal_detail"]
+        if user_detail:
+            del user_["personal_detail"]
         User.update(**user_).where(User.user_id == user_id).execute()
         exist_pd = UserDetail.get_or_none(UserDetail.user_id == user_id)
         if exist_pd:
@@ -47,8 +44,7 @@ class UserActions:
                 UserDetail.user_id == user_id
             ).execute() if user_detail else None
         else:
-            UserDetail.create(user_id=user_id, **
-                              user_detail) if user_detail else None
+            UserDetail.create(user_id=user_id, **user_detail) if user_detail else None
         return UserActions.get_user_by_id(user_id)
 
     @staticmethod
@@ -57,10 +53,7 @@ class UserActions:
         sort_by = sb if sb else [User.user_id]
         rows = (
             User.select()
-            .where(
-                User.user_name.contains(params.name)
-                if params.name else True
-            )
+            .where(User.user_name.contains(params.name) if params.name else True)
             .order_by(*sort_by)
             .limit(params.limit)
             .offset(params.skip)
@@ -80,11 +73,7 @@ class UserActions:
 
     @staticmethod
     def get_user_by_username(username: str):
-        rows = (
-            User.select()
-            .where(User.user_name == username)
-            .dicts()
-        )
+        rows = User.select().where(User.user_name == username).dicts()
         user = [row for row in rows]
 
         try:

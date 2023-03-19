@@ -15,6 +15,10 @@ from pydantic import BaseModel as PyBaseModel
 from db_actions.product_actions import ProductActions
 from schemas.iproduct import IProduct
 from db_actions.product_category_actions import ProductCategoryActions
+from schemas.iproduct import IProduct
+from schemas.iproduct_category import IProductCategory, IProductCategoryRef
+from schemas.iuser import IUser
+
 
 # # async def get_data():
 # #     async with aiofiles.open("data/dd.csv", "r") as f:
@@ -122,7 +126,8 @@ def dummy_product():
         rows = csv.DictReader(f)
         for row in rows:
             h = IDummyProduct(**row)
-            ProductActions.create_product(h, 1)
+            m = IProduct(**h.dict())
+            ProductActions.create_product(m, 1)
             print(h)
 
 dummy_product()
@@ -138,7 +143,8 @@ def dummy_product_category():
         rows = csv.DictReader(f)
         for row in rows:
             h = IDummyProductCategory(**row)
-            ProductCategoryActions.create_category(h, 1)
+            m = IProductCategory(**h.dict())
+            ProductCategoryActions.create_category(m, 1)
             print(h)
 
 dummy_product_category()
@@ -153,7 +159,8 @@ class dummy_cat_prod_ref():
         rows = csv.DictReader(f)
         for row in rows:
             h = IDummyProductCategoryRef(**row)
-            ProductCategoryActions.add_prod_category(h, 1)
+            m = IProductCategoryRef(**h.dict())
+            ProductCategoryActions.add_prod_category(m, 1)
             print(h)
 
 

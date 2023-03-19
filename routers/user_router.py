@@ -74,7 +74,14 @@ async def get_users(
     return UserActions.get_users(params)
 
 
+@router.get("/me", response_model=IUserOut)
+async def get_me(current_user: ITokenData = Depends(get_current_user)):
+    return UserActions.get_user_by_id(current_user.user_id)
+
+
 @router.get("/{user_id}", response_model=IUserOut)
 async def get_user_by_id(user_id: int,
                          current_user: ITokenData = Depends(get_current_user)):
     return UserActions.get_user_by_id(user_id)
+
+

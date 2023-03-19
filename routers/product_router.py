@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 
 from auth.oauth2 import ITokenData, get_current_user
 from db_actions.product_actions import ProductActions
-from schemas.iproduct import IProduct, IProductQueryParams
+from schemas.iproduct import IProduct, IProductQueryParams, IProductUpdate
 from schemas.iquery_params import SortOrder, SortProductBy
 
 router = APIRouter(
@@ -22,6 +22,20 @@ async def create_product(product: IProduct,
             status_code=status.HTTP_404_NOT_FOUND,
             detail={
                 "message": f"product not created: {e}"
+            }
+        )
+
+
+@router.put("/{product_id}")
+async def update_product(product_id: int, product: IProductUpdate,
+                         current_user: ITokenData = Depends(get_current_user)):
+    try:
+        return ProductActions.update_product(product_id, product, current_user.user_id)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "message": f"product not updated: {e}"
             }
         )
 

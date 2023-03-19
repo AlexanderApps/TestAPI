@@ -1,7 +1,7 @@
 from datetime import date
 from helper.sort_order_mapper import mapper
 from models.product import Product
-from schemas.iproduct import IProduct, IProductQueryParams
+from schemas.iproduct import IProduct, IProductQueryParams, IProductUpdate
 
 
 class ProductActions:
@@ -57,10 +57,11 @@ class ProductActions:
         return product
 
     @staticmethod
-    def update_product(id_: int, current_user: int):
-        product = ProductActions.get_product_by_id(id_)
-        Product.delete().where(Product.product_id == id_)
-        return product
+    def update_product(id_: int, product: IProductUpdate, current_user: int):
+        pd = {x: y for x, y in product.dict() if y != None}
+        Product.update(**pd).where(Product.product_id == id_)
+        product_ = ProductActions.get_product_by_id(id_)
+        return product_
 
     @staticmethod
     def increase_quantity(id_: int, quantity: int):
