@@ -58,8 +58,8 @@ class ProductActions:
 
     @staticmethod
     def update_product(id_: int, product: IProductUpdate, current_user: int):
-        pd = {x: y for x, y in product.dict() if y != None}
-        Product.update(**pd).where(Product.product_id == id_)
+        pd = {x: y for x, y in product.dict().items() if y != None}
+        Product.update(**pd).where(Product.product_id == id_).execute()
         product_ = ProductActions.get_product_by_id(id_)
         return product_
 

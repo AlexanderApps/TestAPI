@@ -39,15 +39,15 @@ class IProduct(PyBaseModel):
             raise ValueError("access cannot be less than or equal to 0.")
         return value
 
+
 class IProductUpdate(IProduct):
-    product_id: int
     name: str | None = None
     batch_number: str | None = None
     expiry_date: date | None = None
     access: int | None = None
     status: int | None = None
     price: float | None = None
-    # quantity_available: int | None = None
+    quantity_available: int | None = None
 
 
 class IProductQueryParams(PyBaseModel):
