@@ -23,7 +23,7 @@ class IProduct(PyBaseModel):
     @validator("other_names")
     @classmethod
     def validate_other_names(cls, value):
-        return value.strip().upper()
+        return value.strip().upper() if value else value
 
     @validator("status")
     @classmethod

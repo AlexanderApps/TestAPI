@@ -19,7 +19,7 @@ async def create_product(product: IProduct,
         return ProductActions.create_product(product, current_user.user_id)
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail={
                 "message": f"product not created: {e}"
             }

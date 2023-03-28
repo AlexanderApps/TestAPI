@@ -14,7 +14,7 @@ class ProductActions:
             q: int = Product.insert(**product_).execute()
         except Exception as e:
             print(e)
-            raise (e)
+            raise ValueError(e)
         return ProductActions.get_product_by_id(q)
 
     @staticmethod
